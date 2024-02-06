@@ -19,7 +19,7 @@ namespace Calculus_Plus
                 {
                     Console.Write($" {sep[i]} |");
                 }
-                Console.Write($" {sep[sep.Length]} or choose one of the implemented Mathematical Special Methods:\nSquare-Calculation of Double x (Heron-Algorithm) | [Sqrt(x)], Prim-Finder [Sieve_of_Ethothostemes(int max_num)] More coming soon!\n");
+                Console.Write($" {sep[sep.Length-1]} or choose one of the implemented Mathematical Special Methods:\nSquare-Calculation of Double x (Heron-Algorithm) | [Sqrt(x)], Prim-Finder [Sieve_of_Ethothostemes(int max_num)] More coming soon!\n");
 
                 string? term = Console.ReadLine();
 
@@ -30,10 +30,10 @@ namespace Calculus_Plus
                 }
                 else
                 {
-                    int? [] result = new int?[100];
+                    double? [] result = new double?[100];
                     bool rdy=true;
                     string[] num = term.Split(sep);
-                    int[] no=new int[num.Length];
+                    double[] no=new double[num.Length];
 
                     if (term.Contains("Sieve_of_Ethothostemes"))
                     {
@@ -44,9 +44,9 @@ namespace Calculus_Plus
                         num[0] = term.Split('[').ToString();
                     }
                     
-                    for(int i=0; i<num.Length;i++)
+                    for(int i=0; i < num.Length ;i++)
                     {
-                        rdy = int.TryParse(num[i],out no[i]);
+                        rdy = double.TryParse(num[i],out no[i]);
                     }
                     if (rdy)
                     {
@@ -69,13 +69,29 @@ namespace Calculus_Plus
                                     result[0] = Math.Div(no[0],no[1]);
                                     break;
                                 case "%":
-                                    result[0] = Math.Mod(no[0],no[1]);
+                                    bool x_rdy = int.TryParse(no[0].ToString(), out int x);
+                                    bool y_rdy = int.TryParse(no[1].ToString(), out int y);
+                                    if(x_rdy && y_rdy)
+                                        result[0] = Math.Mod(x,y);
+                                    else result[0] = null;
                                     break;
-                                case "W":
+                                case "W": // need to be implemented W should be an alias for the Math.Sqrt()-method
                                     result[0] = Math.Sqrt(no[0]);
                                     break;
-                                case "P":
-                                    result[] = Math.Sieve_of_Eratosthenes(no[0]);
+                                case "P": // need to be implemented P should be an alias for the Math.Sieves_of_Eratosthenes()-method
+                                    bool z_rdy = int.TryParse(no[0].ToString(),out int z);
+                                    if (z_rdy)
+                                    {
+                                        int[] tmp = new int[result.Length];
+                                        tmp = Math.Sieve_of_Eratosthenes(z);
+                                   
+                                        for(int h=0; h<result.Length;h++)
+                                        {
+                                            result[h] = tmp[h];
+                                        }
+                                    }
+                                    else
+                                        result = null;
                                     break;
                                 default:
                                     result = null;
@@ -86,10 +102,16 @@ namespace Calculus_Plus
 
                         if (result != null)
                         {
-                            Console.WriteLine($"{term} = {result}");
+
+                            for (int i = 0;i < result.Length;i++)
+                            {
+                                if (result[i] != null)
+                                    Console.WriteLine($"{term} = {result}");
+                                else
+                                    Console.WriteLine("Unknown Mistake! Please try again!");
+                            }
                         }
-                        else 
-                            Console.WriteLine("Unknown Mistake! Please try again!");
+                        else Console.WriteLine("Unknown Mistake!");
 
                         Console.WriteLine("Once again? [Y / N]");
 
