@@ -8,7 +8,7 @@ namespace Calculus_Plus
         {
             char[] sep = new char[]{ '+','-','*','/','%','#','W'};
             bool modus=true; // quit-control
-            string[] opt = new string[100]; 
+            string[] opt = new string[10]; 
 
             Console.WriteLine("Welcome to Calculus_Plus 1.0:");
 
@@ -19,7 +19,7 @@ namespace Calculus_Plus
                 {
                     Console.Write($" {sep[i]} |");
                 }
-                Console.Write($" {sep[sep.Length-1]}\n or choose one of the implemented Mathematical Special Methods:\nSquare-Calculation of Double x (Heron-Algorithm) [use: Wx] | Prim-Finder for (0,x) [use: #x] \nMore coming soon!\n");
+                Console.Write($" {sep[sep.Length-1]}\n or choose one of the implemented Mathematical Special Methods:\nSquare-Calculation of Double x (Heron-Algorithm) [use: Wx] | Prim-Finder for (0,x) [use: #x] \n");
 
                 string? term = Console.ReadLine();
 
@@ -34,13 +34,13 @@ namespace Calculus_Plus
                     bool rdy = true;
                     string[] num = term.Split(sep);
                     double[] no = new double[num.Length];
-
-                    if (term.Contains('#'))
-                    {
-                        num = term.Split('#');
-                    }
-           
                     
+                    for(int i=0;i<sep.Length - 1;i++)
+                    {
+                        if (term.Contains(sep[i]))
+                            opt[i] = sep[i].ToString();
+                    }
+
                     for(int i=0; i < num.Length ;i++)
                     {
                         rdy &= double.TryParse(num[i],out no[i]);
@@ -90,10 +90,10 @@ namespace Calculus_Plus
                                         }
                                     }
                                     else
-                                        result = null;
+                                        result[0] = null;
                                     break;
                                 default:
-                                    result = null;
+                                    result[1] = null;
                                     break;
 
                             }
@@ -105,7 +105,10 @@ namespace Calculus_Plus
                             for (int i = 0;i < result.Length;i++)
                             {
                                 if (result[i] != null)
-                                    Console.WriteLine($"{term} = {result}");
+                                {
+                                    Console.WriteLine($"{term} = {result[i].ToString()}");
+                                    break;
+                                }
                                 else
                                     Console.WriteLine("Unknown Mistake! Please try again!");
                             }
