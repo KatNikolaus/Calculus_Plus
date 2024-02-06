@@ -30,20 +30,18 @@ namespace Calculus_Plus
                 }
                 else
                 {
-                    int? result;
+                    int? [] result = new int?[100];
                     bool rdy=true;
                     string[] num = term.Split(sep);
                     int[] no=new int[num.Length];
 
                     if (term.Contains("Sieve_of_Ethothostemes"))
                     {
-                        num[0] = term.Split('[');
-                        num[1] = "0";
+                        num[0] = term.Split('[').ToString();
                     }
                     if (term.Contains("Sqrt"))
                     {
-                        num[0] = "0";
-                        num[1] = "0";
+                        num[0] = term.Split('[').ToString();
                     }
                     
                     for(int i=0; i<num.Length;i++)
@@ -56,28 +54,28 @@ namespace Calculus_Plus
                         for (int i = 0;i < opt.Length;i++)
                         {
 
-                            switch (opt)
+                            switch (opt[i])
                             {
-                                case '+':
-                                    result = Math.Add(no[0],no[1]);
+                                case "+":
+                                    result[0] = Math.Add(no[0],no[1]);
                                     break;
-                                case '-':
-                                    result = Math.Sub(no[0],no[1]);
+                                case "-":
+                                    result[0] = Math.Sub(no[0],no[1]);
                                     break;
-                                case '*':
-                                    result = Math.Mul(no[0],no[1]);
+                                case "*":
+                                    result[0] = Math.Mul(no[0],no[1]);
                                     break;
-                                case '/':
-                                    result = Math.Div(no[0],no[1]);
+                                case "/":
+                                    result[0] = Math.Div(no[0],no[1]);
                                     break;
-                                case '%':
-                                    result = Math.Mod(no[0],no[1]);
+                                case "%":
+                                    result[0] = Math.Mod(no[0],no[1]);
                                     break;
-                                case 'W':
-                                    result = Math.Sqrt(no[0],no[1]);
+                                case "W":
+                                    result[0] = Math.Sqrt(no[0]);
                                     break;
-                                case 'P':
-                                    result = Math.Sieve_of_Eratosthenes(no[0]);
+                                case "P":
+                                    result[] = Math.Sieve_of_Eratosthenes(no[0]);
                                     break;
                                 default:
                                     result = null;
@@ -86,7 +84,12 @@ namespace Calculus_Plus
                             }
                         }
 
-                        Console.WriteLine($"{term} = {result}");
+                        if (result != null)
+                        {
+                            Console.WriteLine($"{term} = {result}");
+                        }
+                        else 
+                            Console.WriteLine("Unknown Mistake! Please try again!");
 
                         Console.WriteLine("Once again? [Y / N]");
 
