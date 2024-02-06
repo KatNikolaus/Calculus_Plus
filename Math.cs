@@ -8,10 +8,12 @@ namespace Calculus_Plus
 {
     internal class Math
     {
-        public int Add(int x,int y) { return x + y; }
+        public static int Add(int x,int y) { return x + y; }
 
-        public int Sub(int x,int y) { return x - y; }
-        public int? Div(int x,int y)
+        public static int Sub(int x,int y) { return x - y; }
+
+        public static int Mul(int x,int y) { return x * y; }
+        public static int? Div(int x,int y)
         {
             if (y == 0)
             {
@@ -22,10 +24,32 @@ namespace Calculus_Plus
                 return x / y;
         }
 
-        public int Mod(int x,int y) { return x % y; }
+        public static double Add(double x,double y) { return x + y; }
+
+        public static double Sub(double x,double y) { return x - y; }
+
+        public static double Mul(double x,double y) { return x * y; }
+        public static double Div(double x, double y) {  return x / y; }
+        public static double? Div(double? x,double? y)
+        {
+            if(x == null || y == null)
+            {
+                Console.WriteLine("Para-Mistake!");
+                return null;
+            }
+            if (y == 0)
+            {
+                Console.WriteLine("Input-Error! Divisor = 0!");
+                return null;
+            }
+            else
+                return x / y;
+        }
+
+        public static int Mod(int x,int y) { return x % y; }
 
         // Heron Method to find the root of x with a accuracy of diff=0,0000001
-        public double Sqrt(double x)
+        public static double Sqrt(double x)
         {
             const double diff=0.000001;
 
@@ -44,13 +68,13 @@ namespace Calculus_Plus
                     {
                         double sqrt=x;
                         double b_n=1;
-                        double diff_real= sqrt-b_n;
+                        double diff_real= Sub(sqrt,b_n);
 
-                        while (diff_real <= diff)
+                        while (diff_real >= diff)
                         {
-                            sqrt = (sqrt + b_n) / 2;
-                            b_n = x / sqrt;
-                            diff_real = sqrt - b_n;
+                            sqrt = Div(Add(sqrt,b_n),2.0);
+                            b_n = Div(x,sqrt);
+                            diff_real = Sub(sqrt,b_n);
                         }
 
                         return sqrt;
@@ -58,15 +82,15 @@ namespace Calculus_Plus
 
                     else
                     {
-                        double sqrt=1;
-                        double b_n=x;
-                        double diff_real= sqrt-b_n;
+                        double sqrt = 1;
+                        double b_n = x;
+                        double diff_real= Sub(sqrt,b_n);
 
                         while (diff_real <= diff)
                         {
-                            sqrt = (sqrt + b_n) / 2;
-                            b_n = x / sqrt;
-                            diff_real = sqrt - b_n;
+                            sqrt = Div(Add(sqrt,b_n),2.0);
+                            b_n = Div(x,sqrt);
+                            diff_real = Sub(sqrt,b_n);
                         }
 
                         return sqrt;
@@ -76,23 +100,25 @@ namespace Calculus_Plus
         }
 
         // Simple Method to find all Prim-Numbers in [2,max]
-        public int[] Sieve_of_Eratosthenes(int max) 
+        public static int[] Sieve_of_Eratosthenes(int max) 
         {
-            int[] num=new int[max-2];
-            int[] prim= new int[max-2];
+            int[] num=new int[max];
+            int[] prim= new int[max];
 
-            int x=0;
+            //int x=0;
 
             for(int i=0; i<max;i++)
             {
-                num[i] = i;
-                
+                num[i] = i;  
             }
 
             for(int i=0;i<max-2;i++)
             { 
-                if (prim[i] == x)
-                { }
+                if (i == num[i])
+                {
+                    prim[i] = num[i];
+                }
+                
                     
             }
 

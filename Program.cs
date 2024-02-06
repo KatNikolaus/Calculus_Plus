@@ -6,11 +6,9 @@ namespace Calculus_Plus
     {
         static void Main(string[] args)
         {
-            Math math = new Math();
-            double sqrt = math.Sqrt(9.0);
-            Console.WriteLine($"Calculation of Sqrt(9) = {sqrt.ToString()}");
+            double sqrt = Math.Sqrt(9.0);
+            Console.WriteLine($"Calculation of Sqrt(9) = {sqrt}");
+            Console.ReadLine();
         }
-    }
-
-    
+    }   
 }
