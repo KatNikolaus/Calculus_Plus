@@ -29,10 +29,10 @@ namespace Calculus_Plus
         public static double Sub(double x,double y) { return x - y; }
 
         public static double Mul(double x,double y) { return x * y; }
-        public static double Div(double x, double y) {  return x / y; }
+        public static double Div(double x,double y) { return x / y; }
         public static double? Div(double? x,double? y)
         {
-            if(x == null || y == null)
+            if (x == null || y == null)
             {
                 Console.WriteLine("Para-Mistake!");
                 return null;
@@ -96,34 +96,60 @@ namespace Calculus_Plus
                         return sqrt;
                     }
                 }
-            }  
+            }
         }
 
         // Simple Method to find all Prim-Numbers in [2,max]
-        public static int[] Sieve_of_Eratosthenes(int max) 
+        public static int?[] Sieve_of_Eratosthenes(int max)
         {
-            int[] num=new int[max];
-            int[] prim= new int[max];
+            int?[] result = new int?[999999999];
+            int ?[] tmp = new int?[max];
 
-            //int x=0;
-
-            for(int i=0; i<max;i++)
+            if (max < 999999999)
             {
-                num[i] = i;  
-            }
-
-            for(int i=0;i<max-2;i++)
-            { 
-                if (i == num[i])
+                for (int i = 0;i <= 999999999 - 1;i++)
                 {
-                    prim[i] = num[i];
+                    tmp[i] = i;
                 }
-                
-                    
+            }
+            else
+            {
+                Console.WriteLine("Input-Mistake! Please minorize your Sieve-Border!");
+                return null;
             }
 
-            return prim;
+            for (int i = 2;i <= max + 2;i++)   // Arrayvergleichswertdurchlauf
+            {
+                if (tmp[i - 2] == -1)
+                {
+                    continue;
+                }
+                for (int j = 0;j <= max - 1;j++)   // Arrayindexdurchlauf
+                {
+                    if (tmp[j] % i == 0 && tmp[j] / i != 1)
+                    {
+                        tmp[j] = -1;
+                    }
+                }
+            }
+
+            for (int i = 0;i <= max - 2;i++)
+            {
+                for (int j = 0;j <= max - 2;j++)
+                {
+                    if (tmp[i] != -1)
+                    {
+                        result[j] = tmp[i];
+                    }
+                }
+            }
+
+            return result;
+
+
         }
 
     }
+
 }
+

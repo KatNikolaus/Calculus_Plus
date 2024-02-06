@@ -6,20 +6,20 @@ namespace Calculus_Plus
     {
         static void Main(string[] args)
         {
-            char[] sep = new char[]{ '+','-','*','/','%'};
-            bool modus=true;
+            char[] sep = new char[]{ '+','-','*','/','%','#','W'};
+            bool modus=true; // quit-control
             string[] opt = new string[100]; 
 
             Console.WriteLine("Welcome to Calculus_Plus 1.0:");
 
             while (modus)
             {
-                Console.WriteLine("Please edit your el. mathematical Calculation");
+                Console.WriteLine("Please edit your mathematical Term:\n");
                 for (int i = 0;i < sep.Length - 1;i++)
                 {
                     Console.Write($" {sep[i]} |");
                 }
-                Console.Write($" {sep[sep.Length-1]} or choose one of the implemented Mathematical Special Methods:\nSquare-Calculation of Double x (Heron-Algorithm) | [Sqrt(x)], Prim-Finder [Sieve_of_Ethothostemes(int max_num)] More coming soon!\n");
+                Console.Write($" {sep[sep.Length-1]}\n or choose one of the implemented Mathematical Special Methods:\nSquare-Calculation of Double x (Heron-Algorithm) [use: Wx] | Prim-Finder for (0,x) [use: #x] \nMore coming soon!\n");
 
                 string? term = Console.ReadLine();
 
@@ -30,24 +30,22 @@ namespace Calculus_Plus
                 }
                 else
                 {
-                    double? [] result = new double?[100];
-                    bool rdy=true;
+                    double? [] result = new double?[100]; // result-Array: mostly only result[0] is filled
+                    bool rdy = true;
                     string[] num = term.Split(sep);
-                    double[] no=new double[num.Length];
+                    double[] no = new double[num.Length];
 
-                    if (term.Contains("Sieve_of_Ethothostemes"))
+                    if (term.Contains('#'))
                     {
-                        num[0] = term.Split('[').ToString();
+                        num = term.Split('#');
                     }
-                    if (term.Contains("Sqrt"))
-                    {
-                        num[0] = term.Split('[').ToString();
-                    }
+           
                     
                     for(int i=0; i < num.Length ;i++)
                     {
-                        rdy = double.TryParse(num[i],out no[i]);
+                        rdy &= double.TryParse(num[i],out no[i]);
                     }
+
                     if (rdy)
                     {
 
@@ -59,6 +57,7 @@ namespace Calculus_Plus
                                 case "+":
                                     result[0] = Math.Add(no[0],no[1]);
                                     break;
+
                                 case "-":
                                     result[0] = Math.Sub(no[0],no[1]);
                                     break;
@@ -78,11 +77,11 @@ namespace Calculus_Plus
                                 case "W": // need to be implemented W should be an alias for the Math.Sqrt()-method
                                     result[0] = Math.Sqrt(no[0]);
                                     break;
-                                case "P": // need to be implemented P should be an alias for the Math.Sieves_of_Eratosthenes()-method
+                                case "#": // need to be implemented P should be an alias for the Math.Sieves_of_Eratosthenes()-method
                                     bool z_rdy = int.TryParse(no[0].ToString(),out int z);
                                     if (z_rdy)
                                     {
-                                        int[] tmp = new int[result.Length];
+                                        int?[] tmp = new int?[result.Length];
                                         tmp = Math.Sieve_of_Eratosthenes(z);
                                    
                                         for(int h=0; h<result.Length;h++)
