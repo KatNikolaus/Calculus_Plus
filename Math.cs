@@ -102,12 +102,12 @@ namespace Calculus_Plus
         // Simple Method to find all Prim-Numbers in [2,max]
         public static int?[] Sieve_of_Eratosthenes(int max)
         {
-            int?[] result = new int?[999999999];
+            int?[] result = new int?[99999];
             int ?[] tmp = new int?[max];
 
-            if (max < 999999999)
+            if (max < 99999)
             {
-                for (int i = 0;i <= 999999999 - 1;i++)
+                for (int i = 0;i <= max - 1;i++)
                 {
                     tmp[i] = i;
                 }

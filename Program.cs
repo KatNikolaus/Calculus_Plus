@@ -43,7 +43,8 @@ namespace Calculus_Plus
 
                     for(int i=0; i < num.Length ;i++)
                     {
-                        rdy &= double.TryParse(num[i],out no[i]);
+                        //rdy &= 
+                            double.TryParse(num[i],out no[i]);
                     }
 
                     if (rdy)
@@ -74,11 +75,11 @@ namespace Calculus_Plus
                                         result[0] = Math.Mod(x,y);
                                     else result[0] = null;
                                     break;
-                                case "W": // need to be implemented W should be an alias for the Math.Sqrt()-method
-                                    result[0] = Math.Sqrt(no[0]);
+                                case "W": 
+                                    result[0] = Math.Sqrt(no[1]);
                                     break;
-                                case "#": // need to be implemented P should be an alias for the Math.Sieves_of_Eratosthenes()-method
-                                    bool z_rdy = int.TryParse(no[0].ToString(),out int z);
+                                case "#": 
+                                    bool z_rdy = int.TryParse(no[1].ToString(),out int z);
                                     if (z_rdy)
                                     {
                                         int?[] tmp = new int?[result.Length];
