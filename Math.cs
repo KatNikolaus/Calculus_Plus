@@ -93,6 +93,7 @@ namespace Calculus_Plus
                             diff_real = Sub(sqrt,b_n);
                         }
 
+                        // missing: formatting sqrt= X.XXXXXX
                         return sqrt;
                     }
                 }
@@ -102,12 +103,12 @@ namespace Calculus_Plus
         // Simple Method to find all Prim-Numbers in [2,max]
         public static int?[] Sieve_of_Eratosthenes(int max)
         {
-            int?[] result = new int?[99999];
-            int ?[] tmp = new int?[max];
+            int?[] result = new int?[max+1];
+            int ?[] tmp = new int?[max+1];
 
-            if (max < 99999)
+            if (max+1 < 99999)
             {
-                for (int i = 0;i <= max - 1;i++)
+                for (int i = 0;i <= max;i++)
                 {
                     tmp[i] = i;
                 }
@@ -118,13 +119,18 @@ namespace Calculus_Plus
                 return null;
             }
 
-            for (int i = 2;i <= max + 2;i++)   // Arrayvergleichswertdurchlauf
+            for (int i = 0;i <= max;i++)   // Arrayvergleichswertdurchlauf
             {
-                if (tmp[i - 2] == -1)
+                if (tmp[i] == 0 || tmp[i] == 1)
+                {
+                    tmp[i] = -1;
+                    continue;
+                }
+                if (tmp[i] == -1)
                 {
                     continue;
                 }
-                for (int j = 0;j <= max - 1;j++)   // Arrayindexdurchlauf
+                for (int j = 0;j <= max - 1;j++) 
                 {
                     if (tmp[j] % i == 0 && tmp[j] / i != 1)
                     {
@@ -133,13 +139,15 @@ namespace Calculus_Plus
                 }
             }
 
-            for (int i = 0;i <= max - 2;i++)
+            for (int j = 0;j <= max;j++)
             {
-                for (int j = 0;j <= max - 2;j++)
+                for (int i = 0;i <= max;i++)
                 {
                     if (tmp[i] != -1)
                     {
                         result[j] = tmp[i];
+                        tmp[i] = -1;
+                        break;
                     }
                 }
             }

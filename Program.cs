@@ -6,14 +6,15 @@ namespace Calculus_Plus
     {
         static void Main(string[] args)
         {
-            char[] sep = new char[]{ '+','-','*','/','%','#','W'};
             bool modus=true; // quit-control
-            char[] opt = new char[10]; 
 
             Console.WriteLine("Welcome to Calculus_Plus 1.0:");
 
             while (modus)
             {
+                char[] sep = new char[]{ '+','-','*','/','%','#','W'};
+                char[] opt = new char[10];
+
                 Console.WriteLine("Please edit your mathematical Term:\n");
                 for (int i = 0;i < sep.Length - 1;i++)
                 {
@@ -85,17 +86,17 @@ namespace Calculus_Plus
                                         int?[] tmp = new int?[result.Length];
                                         tmp = Math.Sieve_of_Eratosthenes(z);
                                    
-                                        for(int h=0; h<result.Length;h++)
+                                        for(int h=0; h<tmp.Length;h++)
                                         {
+                                            if (tmp[h]!=null)
                                             result[h] = tmp[h];
                                         }
+                                        break;
                                     }
                                     else
                                         result[0] = null;
                                     break;
-                                default:
-                                    result[1] = null;
-                                    break;
+                         
 
                             }
                         }
@@ -108,10 +109,10 @@ namespace Calculus_Plus
                                 if (result[i] != null)
                                 {
                                     Console.WriteLine($"{term} = {result[i].ToString()}");
-                                    break;
+
                                 }
                                 else
-                                    Console.WriteLine("Unknown Mistake! Please try again!");
+                                    break;
                             }
                         }
                         else Console.WriteLine("Unknown Mistake!");
