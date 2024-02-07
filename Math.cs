@@ -146,7 +146,6 @@ namespace Calculus_Plus
 
             return result;
 
-
         }
 
     }

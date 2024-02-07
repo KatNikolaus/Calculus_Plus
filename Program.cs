@@ -8,7 +8,7 @@ namespace Calculus_Plus
         {
             char[] sep = new char[]{ '+','-','*','/','%','#','W'};
             bool modus=true; // quit-control
-            string[] opt = new string[10]; 
+            char[] opt = new char[10]; 
 
             Console.WriteLine("Welcome to Calculus_Plus 1.0:");
 
@@ -17,7 +17,7 @@ namespace Calculus_Plus
                 Console.WriteLine("Please edit your mathematical Term:\n");
                 for (int i = 0;i < sep.Length - 1;i++)
                 {
-                    Console.Write($" {sep[i]} |");
+                    Console.Write($" {sep[i].ToString()} |");
                 }
                 Console.Write($" {sep[sep.Length-1]}\n or choose one of the implemented Mathematical Special Methods:\nSquare-Calculation of Double x (Heron-Algorithm) [use: Wx] | Prim-Finder for (0,x) [use: #x] \n");
 
@@ -35,10 +35,10 @@ namespace Calculus_Plus
                     string[] num = term.Split(sep);
                     double[] no = new double[num.Length];
                     
-                    for(int i=0;i<sep.Length - 1;i++)
+                    for(int i=0;i<sep.Length;i++)
                     {
                         if (term.Contains(sep[i]))
-                            opt[i] = sep[i].ToString();
+                            opt[i] = sep[i];
                     }
 
                     for(int i=0; i < num.Length ;i++)
@@ -55,30 +55,30 @@ namespace Calculus_Plus
 
                             switch (opt[i])
                             {
-                                case "+":
+                                case '+':
                                     result[0] = Math.Add(no[0],no[1]);
                                     break;
 
-                                case "-":
+                                case '-':
                                     result[0] = Math.Sub(no[0],no[1]);
                                     break;
-                                case "*":
+                                case '*':
                                     result[0] = Math.Mul(no[0],no[1]);
                                     break;
-                                case "/":
+                                case '/':
                                     result[0] = Math.Div(no[0],no[1]);
                                     break;
-                                case "%":
+                                case '%':
                                     bool x_rdy = int.TryParse(no[0].ToString(), out int x);
                                     bool y_rdy = int.TryParse(no[1].ToString(), out int y);
                                     if(x_rdy && y_rdy)
                                         result[0] = Math.Mod(x,y);
                                     else result[0] = null;
                                     break;
-                                case "W": 
+                                case 'W': 
                                     result[0] = Math.Sqrt(no[1]);
                                     break;
-                                case "#": 
+                                case '#': 
                                     bool z_rdy = int.TryParse(no[1].ToString(),out int z);
                                     if (z_rdy)
                                     {
