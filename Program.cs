@@ -8,7 +8,7 @@ namespace Calculus_Plus
         {
             bool modus=true; // quit-control
 
-            Console.WriteLine("Welcome to Calculus_Plus 1.0:");
+            Console.WriteLine("Welcome to Calculus_Plus 1.1:");
 
             while (modus)
             {
@@ -18,9 +18,9 @@ namespace Calculus_Plus
                 Console.WriteLine("Please edit your mathematical Term:\n");
                 for (int i = 0;i < sep.Length - 1;i++)
                 {
-                    Console.Write($" {sep[i].ToString()} |");
+                    Console.Write($" {sep[i]} |");
                 }
-                Console.Write($" {sep[sep.Length-1]}\n or choose one of the implemented Mathematical Special Methods:\nSquare-Calculation of Double x (Heron-Algorithm) [use: Wx] | Prim-Finder for (0,x) [use: #x] \n");
+                Console.Write($" {sep[^-1]}\n or choose one of the implemented Mathematical Special Methods:\nSquare-Calculation of Double x (Heron-Algorithm) [use: Wx] | Prim-Finder for [2,x] [use: #x] \n");
 
                 string? term = Console.ReadLine();
 
@@ -91,13 +91,10 @@ namespace Calculus_Plus
                                             if (tmp[h]!=null)
                                             result[h] = tmp[h];
                                         }
-                                        break;
                                     }
                                     else
                                         result[0] = null;
-                                    break;
-                         
-
+                                break;
                             }
                         }
 
@@ -108,7 +105,7 @@ namespace Calculus_Plus
                             {
                                 if (result[i] != null)
                                 {
-                                    Console.WriteLine($"{term} = {result[i].ToString()}");
+                                    Console.WriteLine($"{term} = {result[i]}");
 
                                 }
                                 else
@@ -123,6 +120,7 @@ namespace Calculus_Plus
 
                         if (ui == "Y")
                             continue;
+
                         else if(ui == "N")
                         {
                             modus=false;
