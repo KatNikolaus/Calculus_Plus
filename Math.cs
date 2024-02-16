@@ -100,6 +100,25 @@ namespace Calculus_Plus
             }
         }
 
+        public static int? Fak(int x)
+        {
+            int f = x;
+
+            if (f == 0)
+                return 0;
+            else if (f == 1)
+                return 1;
+            else if (f > 1)
+            {
+                return f*Fak(f - 1);
+            }
+            else
+            {
+                Console.WriteLine("Fak-Error!");
+                return null;
+            }    
+        }
+
         // Simple Method to find all Prim-Numbers in [2,max]
         public static int?[] Sieve_of_Eratosthenes(int max)
         {

@@ -8,11 +8,13 @@ namespace Calculus_Plus
         {
             bool modus=true; // quit-control
 
-            Console.WriteLine("Welcome to Calculus_Plus 1.1:");
+            Console.WriteLine("Welcome to Calculus_Plus 1.5:");
 
             while (modus)
             {
-                char[] sep = new char[]{ '+','-','*','/','%','#','W'};
+                const int dig = 5; // digits
+                string? term;
+                char[] sep = new char[]{ '+','-','*','/','!','^','%','#','W'};
                 char[] opt = new char[10];
 
                 Console.WriteLine("Please edit your mathematical Term:\n");
@@ -22,11 +24,11 @@ namespace Calculus_Plus
                 }
                 Console.Write($" {sep[^-1]}\n or choose one of the implemented Mathematical Special Methods:\nSquare-Calculation of Double x (Heron-Algorithm) [use: Wx] | Prim-Finder for [2,x] [use: #x] \n");
 
-                string? term = Console.ReadLine();
+                term = Console.ReadLine();
 
                 if (term == null || term == String.Empty)
                 {
-                    Console.WriteLine("Wrong Input! Please try again!");
+                    Console.WriteLine("No Input! Please try again!");
                     continue;
                 }
                 else
@@ -59,7 +61,6 @@ namespace Calculus_Plus
                                 case '+':
                                     result[0] = Math.Add(no[0],no[1]);
                                     break;
-
                                 case '-':
                                     result[0] = Math.Sub(no[0],no[1]);
                                     break;
@@ -75,6 +76,14 @@ namespace Calculus_Plus
                                     if(x_rdy && y_rdy)
                                         result[0] = Math.Mod(x,y);
                                     else result[0] = null;
+                                    break;
+                                case '!':
+                                    if(int.TryParse(no[0].ToString(), out int res))
+                                        result[0]=Math.Fak(res);
+                                    else
+                                    {
+                                        Console.WriteLine("Fak-Error!");
+                                    }
                                     break;
                                 case 'W': 
                                     result[0] = Math.Sqrt(no[1]);
@@ -116,7 +125,7 @@ namespace Calculus_Plus
 
                         Console.WriteLine("Once again? [Y / N]");
 
-                        string ui = Console.ReadLine().ToUpper();
+                        string? ui = Console.ReadLine().ToUpper();
 
                         if (ui == "Y")
                             continue;
@@ -126,9 +135,12 @@ namespace Calculus_Plus
                             modus=false;
                         }
                         else
-                        { Console.WriteLine("Wrong Input!"); }
+                        { 
+                            Console.WriteLine("Wrong Input!");
+                        }
                     }
                     else 
+
                         Console.WriteLine("Parameter-Mistake: One of your Input-Numbers is wrong!");
                 }
                 
